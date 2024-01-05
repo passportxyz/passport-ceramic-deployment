@@ -35,12 +35,14 @@ ceramic.did = did;
 3. There are two different ways of deploying you can use:
 
 ```bash
+nvm use 20
 npm run testOne
 ```
 
 or
 
 ```bash
+nvm use 20
 npm run testTwo
 ```
 
