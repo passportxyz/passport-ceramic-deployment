@@ -4,12 +4,7 @@
   "description": "This repository contains scripts to help with the deployment of Ceramic nodes.",
   "main": "run.js",
   "scripts": {
-    "generate": "node scripts/commands.mjs",
-    "testOne": "node scripts/run.mjs",
-    "testTwo": "node scripts/runTwo.mjs",
-    "nextDev": "next dev",
-    "ceramic": "CERAMIC_ENABLE_EXPERIMENTAL_COMPOSE_DB='true' ceramic daemon --config ./composedb.config.json",
-    "ceramic:local": "CERAMIC_ENABLE_EXPERIMENTAL_COMPOSE_DB='true' ceramic daemon",
+    "deploy": "node scripts/composites.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
