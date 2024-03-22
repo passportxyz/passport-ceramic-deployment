@@ -8,13 +8,7 @@ You can use the boilerplate in this repository to help merge and deploy composit
 npm install
 ```
 
-2. If you are experimenting locally, create dummy credentials:
-
-```bash
-npm run generate
-```
-
-2a. If you are deploying to a remote node, alter the /scripts/composites.mjs or /scripts/compositesTwo.mjs files in the following way:
+2. If you are deploying to a remote node, alter the /scripts/composites.mjs to replace "your-endpoint-here" with your production node, and "your-private-seed" with your corresponding admin seed (we will be running this locally, so be sure to delete after):
 
 ```JavaScript
 const ceramic = new CeramicClient("your-endpoint-here");
@@ -32,18 +26,11 @@ await did.authenticate();
 ceramic.did = did;
 ```
 
-3. There are two different ways of deploying you can use:
+3. Run the deploy script and ensure you're using the correct version of node:
 
 ```bash
 nvm use 20
-npm run testOne
-```
-
-or
-
-```bash
-nvm use 20
-npm run testTwo
+npm run deploy
 ```
 
 ## Learn More

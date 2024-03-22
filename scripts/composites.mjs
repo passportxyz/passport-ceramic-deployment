@@ -1,26 +1,21 @@
-import { readFileSync } from "fs";
 import { CeramicClient } from "@ceramicnetwork/http-client";
 import {
-  createComposite,
   readEncodedComposite,
-  writeEncodedComposite,
-  writeEncodedCompositeRuntime,
 } from "@composedb/devtools-node";
-import { Composite } from "@composedb/devtools";
 import { DID } from "dids";
 import ora from "ora";
 import { Ed25519Provider } from "key-did-provider-ed25519";
 import { getResolver } from "key-did-resolver";
 import { fromString } from "uint8arrays/from-string";
 
-const ceramic = new CeramicClient("<your endpoint>");
+const ceramic = new CeramicClient("http://localhost:7007");
 const spinner = ora();
 /**
  * @param {Ora} spinner - to provide progress status.
  * @return {Promise<void>} - return void when composite finishes deploying.
  */
 const authenticate = async () => {
-  const seed = "<your seed>";
+  const seed = "1876e5e8034a6925d37dc294e73d62b15964f8e55ec4f2839dda4e928edc5cb9";
   const key = fromString(seed, "base16");
   const did = new DID({
     resolver: getResolver(),
@@ -32,23 +27,8 @@ const authenticate = async () => {
 
 await authenticate();
 
-spinner.info("creating composite");
-
-const attestationComposite = await createComposite(
-  ceramic,
-  "./composites/00-attestation.graphql"
-);
-
-const composite = Composite.from([attestationComposite]);
-
-await writeEncodedComposite(composite, "./definition.json");
-spinner.info("creating composite for runtime usage");
-await writeEncodedCompositeRuntime(
-  ceramic,
-  "./definition.json",
-  "./definition.js"
-);
 spinner.info("deploying composite");
+
 const deployComposite = await readEncodedComposite(
   ceramic,
   "./definition.json"
